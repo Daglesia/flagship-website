@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build Docker container
-    runs-on: ubuntu-latest
+    runs-on: docker
     defaults:
       run:
         working-directory: ./app
