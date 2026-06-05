@@ -1,10 +1,7 @@
 import Logo from "@/assets/daglesium.svg";
 import Image from "next/image";
 import MenuItem from "@/components/MenuItem";
-import TextButton from "@/components/TextButton";
 import CloudCluster from "@/components/CloudCluster";
-import { SignIn } from "@/components/SignIn";
-import Card from "@/components/Card";
 import { Raleway } from "next/font/google";
 
 const font = Raleway({ subsets: ["latin"] });
@@ -19,7 +16,6 @@ export default function Home() {
           label={"created by"}
           imageSrc={Logo}
         />
-        <SignIn />
       </div>
       <div className="absolute h-full w-full -z-10">
         <CloudCluster />
@@ -42,7 +38,6 @@ export default function Home() {
           </div>
         </div>
         <div className="md:hidden relative pt-8 px-8 overflow-hidden flex flex-col gap-24">
-          <SignIn />
           <Image
             src={Logo}
             alt="Daglesium Logo"
