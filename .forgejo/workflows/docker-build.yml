@@ -5,7 +5,6 @@ on:
       - main
       - release/**
   workflow_dispatch:
-
 jobs:
   build:
     name: Build Docker container
@@ -14,22 +13,15 @@ jobs:
       run:
         working-directory: ./app
     env:
+      IMAGE: git.daglesia.com/magdalena/flagship-website
       IMAGE_TAG: ${{ github.sha }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Build Docker image
-        run: |
-          if [ -z "${DOCKER_IMAGE}" ]; then
-            echo "DOCKER_IMAGE secret is required"
-            exit 1
-          fi
-          docker build -f Dockerfile -t "${DOCKER_IMAGE}:${IMAGE_TAG}" -t "${DOCKER_IMAGE}:latest" .
-
+        run: docker build -f Dockerfile -t "${IMAGE}:${IMAGE_TAG}" -t "${IMAGE}:latest" .
       - name: Push Docker image
-        if: env.DOCKER_USERNAME != '' && env.DOCKER_PASSWORD != ''
         run: |
-          docker login "${DOCKER_REGISTRY:-docker.io}" -u "${DOCKER_USERNAME}" --password-stdin <<< "${DOCKER_PASSWORD}"
-          docker push "${DOCKER_IMAGE}:${IMAGE_TAG}"
-          docker push "${DOCKER_IMAGE}:latest"
+          docker login git.daglesia.com -u ${{ secrets.FORGEJO_USERNAME }} --password-stdin <<< "${{ secrets.PACKAGE_TOKEN }}"
+          docker push "${IMAGE}:${IMAGE_TAG}"
+          docker push "${IMAGE}:latest"
