@@ -9,8 +9,6 @@ jobs:
   build:
     name: Build Docker container
     runs-on: docker
-    container:
-      image: docker:27
     defaults:
       run:
         working-directory: ./app
@@ -21,15 +19,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Install Docker CLI
+        run: apt-get update -qq && apt-get install -y -qq docker.io
+      - name: Debug Docker
+        run: docker info
       - name: Build Docker image
         run: docker build -f Dockerfile -t "${IMAGE}:${IMAGE_TAG}" -t "${IMAGE}:latest" .
-      - name: Debug Docker
-        run: |
-          echo "DOCKER_HOST=${DOCKER_HOST}"
-          env | grep -i docker
-          ls /var/run/docker.sock 2>/dev/null && echo "socket exists" || echo "no socket"
       - name: Push Docker image
         run: |
-          docker login git.daglesia.com -u ${{ secrets.FORGEJO_USERNAME }} --password-stdin <<< "${{ secrets.FORGEJO_TOKEN }}"
+          docker login git.daglesia.com -u ${{ secrets.FORGEJO_USERNAME }} --password-stdin <<< "${{ secrets.PACKAGE_TOKEN }}"
           docker push "${IMAGE}:${IMAGE_TAG}"
           docker push "${IMAGE}:latest"
