@@ -9,10 +9,13 @@ jobs:
   build:
     name: Build Docker container
     runs-on: docker
+    container:
+      image: docker:27
     defaults:
       run:
         working-directory: ./app
     env:
+      DOCKER_HOST: tcp://localhost:2375
       IMAGE: git.daglesia.com/magdalena/flagship-website
       IMAGE_TAG: ${{ github.sha }}
     steps:
@@ -20,8 +23,13 @@ jobs:
         uses: actions/checkout@v4
       - name: Build Docker image
         run: docker build -f Dockerfile -t "${IMAGE}:${IMAGE_TAG}" -t "${IMAGE}:latest" .
+      - name: Debug Docker
+        run: |
+          echo "DOCKER_HOST=${DOCKER_HOST}"
+          env | grep -i docker
+          ls /var/run/docker.sock 2>/dev/null && echo "socket exists" || echo "no socket"
       - name: Push Docker image
         run: |
-          docker login git.daglesia.com -u ${{ secrets.FORGEJO_USERNAME }} --password-stdin <<< "${{ secrets.PACKAGE_TOKEN }}"
+          docker login git.daglesia.com -u ${{ secrets.FORGEJO_USERNAME }} --password-stdin <<< "${{ secrets.FORGEJO_TOKEN }}"
           docker push "${IMAGE}:${IMAGE_TAG}"
           docker push "${IMAGE}:latest"
