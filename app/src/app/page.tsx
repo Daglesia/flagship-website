@@ -3,6 +3,8 @@ import Image from "next/image";
 import MenuItem from "@/components/MenuItem";
 import CloudCluster from "@/components/CloudCluster";
 import { Raleway } from "next/font/google";
+import Link from "next/link";
+import TextButton from "@/components/TextButton";
 
 const font = Raleway({ subsets: ["latin"] });
 
@@ -35,6 +37,9 @@ export default function Home() {
               </span>{" "}
               too.
             </h2>
+            <Link href="/home" className="mt-4 w-fit">
+              <TextButton text="Take a look" />
+            </Link>
           </div>
         </div>
         <div className="md:hidden relative pt-8 px-8 overflow-hidden flex flex-col gap-24">
@@ -46,14 +51,6 @@ export default function Home() {
           />
         </div>
       </div>
-      {/* <div className="z-10 w-full min-h-screen">
-          <div className="pt-24 text-center">
-            <h1 className="text-h1 font-bold">Introduce yourself.</h1>
-          </div>
-          <div className="flex px-12 py-12 w-full h-fit">
-            <Card title="I'm a gamer" description="I want my rewards claimed, even if I don’t move a finger." imageSrc="Logo" />
-          </div>
-      </div> */}
     </main>
   );
 }
