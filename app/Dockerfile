@@ -3,14 +3,8 @@ FROM oven/bun:1-alpine AS base
 FROM base AS deps
 WORKDIR /app
 
-COPY package.json bun.lockb* yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-RUN \
-  if [ -f bun.lockb ]; then bun install --frozen-lockfile; \
-  elif [ -f yarn.lock ]; then bun install --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then bun install --frozen-lockfile; \
-  elif [ -f pnpm-lock.yaml ]; then bun install --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
 FROM base AS builder
 WORKDIR /app
