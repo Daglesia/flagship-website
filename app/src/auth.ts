@@ -7,19 +7,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientId: process.env.AUTH_AUTHENTIK_ID,
       clientSecret: process.env.AUTH_AUTHENTIK_SECRET,
       issuer: process.env.AUTH_AUTHENTIK_ISSUER,
+      authorization: {
+        params: {
+          scope: "openid email profile available_services",
+        },
+      },
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture,
+          available_services: profile.available_services ?? [],
+        };
+      },
     }),
   ],
   callbacks: {
-    // Pull the groups claim from Authentik's ID token onto the JWT
-    async jwt({ token, profile }) {
-      if (profile) {
-        token.roles = (profile as { groups?: string[] }).groups ?? [];
+    async jwt({ token, user }) {
+      if (user) {
+        token.available_services =
+          (user as { available_services?: string[] }).available_services ?? [];
       }
       return token;
     },
-    // Expose roles on the session object used by server components
     async session({ session, token }) {
-      session.user.roles = (token.roles as string[]) ?? [];
+      session.user.available_services = (token.available_services as string[]) ?? [];
       return session;
     },
   },

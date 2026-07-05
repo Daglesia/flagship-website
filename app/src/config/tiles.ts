@@ -4,21 +4,29 @@ export interface TileConfig {
   imageSrc: string;
   href: string;
   /** Authentik group/role required to see this tile. Omit for public tiles. */
-  requiredRole?: string;
+  service?: string;
 }
+
+const appUrl = (app: string, query?: string): string => `https://${app}.daglesia.com${query ? query : ""}`
 
 export const TILES: TileConfig[] = [
   {
     title: "Notflix",
-    description: "Watch what you want, when you want.",
+    description: "...",
     imageSrc: "/tiles/notflix.png",
-    href: "/apps/notflix",
-    requiredRole: "notflix:user",
+    href: appUrl("notflix"),
+    service: "notflix",
   },
   {
     title: "Git",
-    description: "Files, synced everywhere.",
+    description: "...",
     imageSrc: "/tiles/shortbox.png",
-    href: "https://git.daglesia.com/Magdalena?tab=repositories",
+    href: appUrl("git", "/Magdalena?tab=repositories")
+  },
+  {
+    title: "Penpot",
+    description: "...",
+    imageSrc: "/tiles/shortbox.png",
+    href: appUrl("design" )
   },
 ];

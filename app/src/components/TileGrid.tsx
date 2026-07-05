@@ -2,9 +2,9 @@ import Link from "next/link";
 import Card from "@/components/Card";
 import { TILES } from "@/config/tiles";
 
-export default function TileGrid({ roles }: { roles: string[] }) {
+export default function TileGrid({ availableServices }: { availableServices: string[] }) {
   const visibleTiles = TILES.filter(
-    (tile) => !tile.requiredRole || roles.includes(tile.requiredRole),
+    (tile) => !tile.service || availableServices.includes(tile.service),
   );
 
   if (visibleTiles.length === 0) {
