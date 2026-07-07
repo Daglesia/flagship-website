@@ -1,4 +1,4 @@
-import Authentik from "@/assets/Authentik.svg";
+import Authentik from "@/assets/authentik.svg";
 import Jellyfin from "@/assets/jellyfin.svg";
 import Forgejo from "@/assets/forgejo.svg";
 import Wikijs from "@/assets/wikijs.svg";
