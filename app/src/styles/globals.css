@@ -7,6 +7,12 @@ body {
   background: var(--color__background);
 }
 
+.img-background {
+  filter: brightness(0) saturate(100%)
+    drop-shadow(0px 1000px 0 #313131);
+  transform: translateY(-1000px);
+}
+
 .img-primary {
   filter: brightness(0) saturate(100%)
     drop-shadow(0px 1000px 0 hsl(var(--color__primary)));
@@ -35,6 +41,42 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.tile {
+  position: relative;
+  width: 480px;
+  height: 240px;
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.tile__icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  color: #888888;
+  fill: #888888;
+  pointer-events: none;
+}
+
+.tile__title,
+.tile__description {
+  position: relative;
+  z-index: 1;
+}
+
+.tile--disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
 }
 
 .animate-gradient {

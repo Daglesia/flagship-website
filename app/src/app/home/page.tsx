@@ -11,7 +11,7 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="pt-24 text-center">
         <h1 className="text-h1 font-bold">
-          {session ? `Welcome back, ${session.user?.name}` : "Your apps"}
+          {session ? `Welcome back, ${session.user?.name}` : "Choose:"}
         </h1>
       </div>
 
