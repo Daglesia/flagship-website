@@ -8,8 +8,7 @@ body {
 }
 
 .img-background {
-  filter: brightness(0) saturate(100%)
-    drop-shadow(0px 1000px 0 #313131);
+  filter: brightness(0) saturate(100%) drop-shadow(0px 1000px 0 #313131);
   transform: translateY(-1000px);
 }
 

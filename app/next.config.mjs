@@ -1,5 +1,5 @@
-import createNextIntlPlugin from 'next-intl/plugin';
- 
+import createNextIntlPlugin from "next-intl/plugin";
+
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
@@ -12,7 +12,7 @@ const nextConfig = {
           ...config.module.rules,
           {
             test: /\.(glsl)$/,
-            use: ['ts-shader-loader'],
+            use: ["ts-shader-loader"],
           },
         ],
       },

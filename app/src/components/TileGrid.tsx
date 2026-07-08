@@ -2,7 +2,7 @@ import Link from "next/link";
 import Card from "@/components/Card";
 import { TileConfig } from "@/config/tiles";
 
-import {useTranslations} from 'next-intl';
+import { useTranslations } from "next-intl";
 
 export default function TileGrid({
   availableServices,
@@ -11,40 +11,40 @@ export default function TileGrid({
   availableServices: string[];
   tiles: TileConfig[];
 }) {
-  const translate = useTranslations('SolutionSelector.tiles')
+  const translate = useTranslations("SolutionSelector.tiles");
 
-  const noUserAccessToTile = (tile: TileConfig) => tile.service && !availableServices.includes(tile.service);
+  const noUserAccessToTile = (tile: TileConfig) =>
+    tile.service && !availableServices.includes(tile.service);
   const footnote = (tile: TileConfig) => {
-    if (tile.upcoming) return translate('comingSoon');
-    if (noUserAccessToTile(tile)) return translate('noAccess');
+    if (tile.upcoming) return translate("comingSoon");
+    if (noUserAccessToTile(tile)) return translate("noAccess");
     return "";
-  }
+  };
   const sortPriority = (tile: TileConfig) => {
     if (tile.upcoming) return 1;
     if (noUserAccessToTile(tile)) return 2;
     return 0;
   };
-  const visibleTiles = tiles.map(
-    (tile) => 
-    ({
+  const visibleTiles = tiles
+    .map((tile) => ({
       disabled: noUserAccessToTile(tile) || tile.upcoming,
       footnote: footnote(tile),
       ...tile,
-    })
-  ).sort((a, b) => {
-    const priorityDiff = sortPriority(a) - sortPriority(b);
-    if (priorityDiff !== 0) return priorityDiff;
-    return a.title.localeCompare(b.title);
-  });
+    }))
+    .sort((a, b) => {
+      const priorityDiff = sortPriority(a) - sortPriority(b);
+      if (priorityDiff !== 0) return priorityDiff;
+      return a.title.localeCompare(b.title);
+    });
   if (visibleTiles.length === 0) {
     return (
-      <p className="text-h3 font-light opacity-60 px-12">
+      <p className="px-12 text-h3 font-light opacity-60">
         No apps available for your account yet.
       </p>
     );
   }
   return (
-    <div className="flex flex-wrap gap-8 px-12 py-12 w-full">
+    <div className="flex w-full flex-wrap gap-8 px-12 py-12">
       {visibleTiles.map((tile) => {
         const card = (
           <Card

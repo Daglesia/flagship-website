@@ -15,9 +15,12 @@ export interface TileConfig {
   upcoming?: boolean;
 }
 
-const appUrl = (app: string, query?: string): string => `https://${app}.daglesia.com${query ? query : ""}`;
+const appUrl = (app: string, query?: string): string =>
+  `https://${app}.daglesia.com${query ? query : ""}`;
 
-export const createTiles = (translate: (key: string) => string): TileConfig[] => [
+export const createTiles = (
+  translate: (key: string) => string,
+): TileConfig[] => [
   {
     title: translate("jellyfin.title"),
     description: translate("jellyfin.description"),

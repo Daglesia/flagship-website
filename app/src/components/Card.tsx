@@ -19,28 +19,30 @@ export default function Card({
   onClick,
 }: CardProps) {
   const footnoteJsx = () => {
-    if(footnote) {
-      return <span className="absolute bottom-0 h-10 text-h5 font-light px-8 h-8">
-        {footnote}
-      </span>
+    if (footnote) {
+      return (
+        <span className="text-h5 absolute bottom-0 h-10 h-8 px-8 font-light">
+          {footnote}
+        </span>
+      );
     }
     return null;
-  }
+  };
 
   return (
     <div
-      className={`tile ${disabled ? "tile--disabled" : ""} gap-8 aspect-video bg-background__variant--light rounded-3xl cursor-pointer`}
+      className={`tile ${disabled ? "tile--disabled" : ""} aspect-video cursor-pointer gap-8 rounded-3xl bg-background__variant--light`}
       onClick={disabled ? undefined : onClick}
       aria-disabled={disabled}
     >
-          <Image
-            src={icon}
-            alt="Daglesium Logo"
-            priority
-            className="max-w-32 w-32 m-auto absolute z-0 left-0 right-0 img-background"
-          />
-      <h1 className="tile__title text-h2 text-primary px-8">{title}</h1>
-      <span className="tile__description text-h3 font-light px-8 h-24">
+      <Image
+        src={icon}
+        alt="Daglesium Logo"
+        priority
+        className="img-background absolute left-0 right-0 z-0 m-auto w-32 max-w-32"
+      />
+      <h1 className="tile__title px-8 text-h2 text-primary">{title}</h1>
+      <span className="tile__description h-24 px-8 text-h3 font-light">
         {description}
       </span>
       {footnoteJsx()}

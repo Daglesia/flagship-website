@@ -8,7 +8,7 @@ interface MenuItemProps {
 }
 
 function ItemLabel({ label }: { label: string | undefined }) {
-  return label ? <p className="text-p font-light pb-0.5">{label}</p> : null;
+  return label ? <p className="pb-0.5 text-p font-light">{label}</p> : null;
 }
 
 export default function MenuItem({
@@ -24,7 +24,7 @@ export default function MenuItem({
           src={imageSrc}
           alt="Daglesium Logo"
           priority
-          className="max-w-12 w-12 img-primary"
+          className="img-primary w-12 max-w-12"
         />
       </div>
       <div className="flex flex-col justify-center">

@@ -4,8 +4,8 @@ export interface TextButtonProps {
 
 export default function TextButton({ text }: TextButtonProps) {
   return (
-    <button className="relative min-w-48 w-fit h-14 bg-primary rounded-3xl flex place-items-center justify-center cursor-pointer hover:bg-secondary__variant--dark">
-      <p className="text-h3 text-background px-8">{text}</p>
+    <button className="relative flex h-14 w-fit min-w-48 cursor-pointer place-items-center justify-center rounded-3xl bg-primary hover:bg-secondary__variant--dark">
+      <p className="px-8 text-h3 text-background">{text}</p>
     </button>
   );
 }

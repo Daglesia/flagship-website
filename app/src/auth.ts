@@ -32,7 +32,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      session.user.available_services = (token.available_services as string[]) ?? [];
+      session.user.available_services =
+        (token.available_services as string[]) ?? [];
       return session;
     },
   },
