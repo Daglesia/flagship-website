@@ -1,21 +1,24 @@
 import { auth, signIn, signOut } from "@/auth";
 import TileGrid from "@/components/TileGrid";
 import TextButton from "@/components/TextButton";
+import { createTiles } from "@/config/tiles";
+import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
   const session = await auth();
   const availableServices = session?.user?.available_services ?? [];
-  console.log(session, "shmoles");
+  const translate = await getTranslations("SolutionSelector");
+  const tiles = createTiles((key) => translate(`tiles.${key}`));
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="pt-24 text-center">
         <h1 className="text-h1 font-bold">
-          {session ? `Welcome back, ${session.user?.name}` : "Choose:"}
+          {translate("title")}
         </h1>
       </div>
 
-      <TileGrid availableServices={availableServices} />
+      <TileGrid availableServices={availableServices} tiles={tiles} />
 
       <div className="pb-12">
         {session ? (
@@ -25,7 +28,7 @@ export default async function Home() {
               await signOut();
             }}
           >
-            <TextButton text="Log out" />
+            <TextButton text={translate("logout")} />
           </form>
         ) : (
           <form
@@ -34,7 +37,7 @@ export default async function Home() {
               await signIn("authentik");
             }}
           >
-            <TextButton text="Log in" />
+            <TextButton text={translate("login")} />
           </form>
         )}
       </div>

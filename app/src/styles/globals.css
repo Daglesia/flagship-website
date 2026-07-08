@@ -24,8 +24,8 @@ body {
   background-size: 110%;
   /* filter: invert(78%) sepia(86%) saturate(1517%) hue-rotate(169deg)
     brightness(111%) contrast(88%) blur(4px); */
-  opacity: 0.08;
-  animation: animatedBackground 100s ease infinite alternate;
+  opacity: 0.18;
+  animation: animatedBackground 30s ease infinite alternate;
 }
 
 @keyframes animatedBackground {

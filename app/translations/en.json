@@ -1,0 +1,47 @@
+{
+    "HomePage": {
+        "createdBy": "created by",
+        "sayMyName": "Daglesia",
+        "title": "Welcome to my domain.",
+        "description": "Here’s everything to suit my fancy.",
+        "description2": "Take a look, maybe yours too.",
+        "callToAction": "Take a look"
+    },
+    "SolutionSelector": {
+        "title": "Choose:",
+        "login": "Login",
+        "logout": "Logout",
+        "tiles": {
+            "noAccess": "No access.",
+            "comingSoon": "Coming soon!",
+            "jellyfin": {
+                "title": "Jellyfin",
+                "description": "Personal media server with a touch of my sense of humour."
+            },
+            "git": {
+                "title": "Git",
+                "description": "Self-hosted Forgejo instance for code and issue tracking."
+            },
+            "penpot": {
+                "title": "Penpot",
+                "description": "A workspace for designs and UX."
+            },
+            "authentik": {
+                "title": "Authentik",
+                "description": "Authentication and authorization service."
+            },
+            "wikijs": {
+                "title": "Wiki.js",
+                "description": "Documentation. But mostly D&D 5th edition utilities."
+            },
+            "music": {
+                "title": "My music",
+                "description": "My other passion, not as skilled in this one though."
+            },
+            "models": {
+                "title": "My 3D models",
+                "description": "Making my life easier and fancier by using a 3D printer."
+            }
+        }
+    }
+}

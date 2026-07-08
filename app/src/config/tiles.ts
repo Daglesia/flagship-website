@@ -15,53 +15,53 @@ export interface TileConfig {
   upcoming?: boolean;
 }
 
-const appUrl = (app: string, query?: string): string => `https://${app}.daglesia.com${query ? query : ""}`
+const appUrl = (app: string, query?: string): string => `https://${app}.daglesia.com${query ? query : ""}`;
 
-export const TILES: TileConfig[] = [
+export const createTiles = (translate: (key: string) => string): TileConfig[] => [
   {
-    title: "Jellyfin",
-    description: "Personal media server with a touch of my sense of humour.",
+    title: translate("jellyfin.title"),
+    description: translate("jellyfin.description"),
     icon: Jellyfin,
     href: appUrl("notflix"),
     service: "notflix",
   },
   {
-    title: "Git",
-    description: "Self-hosted Forgejo instance for code and issue tracking.",
+    title: translate("git.title"),
+    description: translate("git.description"),
     icon: Forgejo,
-    href: appUrl("git", "/Magdalena?tab=repositories")
+    href: appUrl("git", "/Magdalena?tab=repositories"),
   },
   {
-    title: "Penpot",
-    description: "A workspace for designs and UX.",
+    title: translate("penpot.title"),
+    description: translate("penpot.description"),
     icon: Penpot,
-    href: appUrl("design" )
+    href: appUrl("design"),
   },
   {
-    title: "Authentik",
-    description: "Authentication and authorization service.",
+    title: translate("authentik.title"),
+    description: translate("authentik.description"),
     icon: Authentik,
-    href: appUrl("auth" ),
+    href: appUrl("auth"),
     service: "authentik",
   },
   {
-    title: "Wiki.js",
-    description: "Documentation. But mostly D&D 5th edition utilities.",
+    title: translate("wikijs.title"),
+    description: translate("wikijs.description"),
     icon: Wikijs,
-    href: appUrl("docs" )
+    href: appUrl("docs"),
   },
   {
-    title: "My music",
-    description: "My other passion, not as skilled in this one though.",
+    title: translate("music.title"),
+    description: translate("music.description"),
     icon: Music,
-    href: appUrl("docs" ),
+    href: appUrl("docs"),
     upcoming: true,
   },
   {
-    title: "My 3D models",
-    description: "Making my life easier and fancier by using a 3D printer.",
+    title: translate("models.title"),
+    description: translate("models.description"),
     icon: Music,
-    href: appUrl("docs" ),
+    href: appUrl("docs"),
     upcoming: true,
   },
 ];

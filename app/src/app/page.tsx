@@ -6,16 +6,20 @@ import { Raleway } from "next/font/google";
 import Link from "next/link";
 import TextButton from "@/components/TextButton";
 
+import {useTranslations} from 'next-intl';
+
 const font = Raleway({ subsets: ["latin"] });
 
 export default function Home() {
+  const translate = useTranslations('HomePage')
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <div className="hidden md:flex absolute left-4 bottom-4 md:bottom-auto md:left-12 md:right-12 md:top-12 p-4 md:pl-0 md:flex-row md:flex-row md:items-center justify-between">
         <MenuItem
           className="hidden md:flex"
-          title={"Daglesia"}
-          label={"created by"}
+          title={translate('sayMyName')}
+          label={translate('createdBy')}
           imageSrc={Logo}
         />
       </div>
@@ -26,19 +30,15 @@ export default function Home() {
         <div className="md:px-24 md:pt-64 mx-4">
           <div className="flex flex-col gap-2 w-fit">
             <h1 className={`text-h1 font-bold tracking-tighter md:text-base ${font.className}`}>
-              Welcome to my domain.
+              {translate('title')}
             </h1>
             <h2 className="text-h2 font-light px-2">
-              Here’s everything to suit my fancy.
+              {translate('description')}
               <br />
-              Take a look, maybe{" "}
-              <span className="bg-gradient-to-r from-primary via-secondary__variant-dark to-secondary inline-block text-transparent bg-clip-text animate-gradient bg-300%">
-                yours
-              </span>{" "}
-              too.
+              {translate('description2')}
             </h2>
             <Link href="/home" className="mt-4 w-fit">
-              <TextButton text="Take a look" />
+              <TextButton text={translate('callToAction')} />
             </Link>
           </div>
         </div>

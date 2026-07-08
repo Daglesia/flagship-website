@@ -1,11 +1,22 @@
 import Link from "next/link";
 import Card from "@/components/Card";
-import { TileConfig, TILES } from "@/config/tiles";
-export default function TileGrid({ availableServices }: { availableServices: string[] }) {
+import { TileConfig } from "@/config/tiles";
+
+import {useTranslations} from 'next-intl';
+
+export default function TileGrid({
+  availableServices,
+  tiles,
+}: {
+  availableServices: string[];
+  tiles: TileConfig[];
+}) {
+  const translate = useTranslations('SolutionSelector.tiles')
+
   const noUserAccessToTile = (tile: TileConfig) => tile.service && !availableServices.includes(tile.service);
   const footnote = (tile: TileConfig) => {
-    if (tile.upcoming) return "Coming soon!";
-    if (noUserAccessToTile(tile)) return "No access."
+    if (tile.upcoming) return translate('comingSoon');
+    if (noUserAccessToTile(tile)) return translate('noAccess');
     return "";
   }
   const sortPriority = (tile: TileConfig) => {
@@ -13,7 +24,7 @@ export default function TileGrid({ availableServices }: { availableServices: str
     if (noUserAccessToTile(tile)) return 2;
     return 0;
   };
-  const visibleTiles = TILES.map(
+  const visibleTiles = tiles.map(
     (tile) => 
     ({
       disabled: noUserAccessToTile(tile) || tile.upcoming,
