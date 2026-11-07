@@ -4,6 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { LoadingProvider } from "@/components/LoadingProvider";
 import SpaceBackground from "@/components/SpaceBackground";
 
+import { PageTransitionProvider } from "@/components/PageTransition";
+
 const font = Poppins({ subsets: ["latin"], weight: ["200", "500"] });
 
 import "@/styles/globals.css";
@@ -26,7 +28,7 @@ export default function RootLayout({
       <body className={font.className}>
         <NextIntlClientProvider>
           <LoadingProvider>
-            {children}
+            <PageTransitionProvider>{children}</PageTransitionProvider>
             <SpaceBackground />
           </LoadingProvider>
         </NextIntlClientProvider>

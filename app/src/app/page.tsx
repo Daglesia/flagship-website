@@ -3,10 +3,11 @@ import Image from "next/image";
 import MenuItem from "@/components/MenuItem";
 import CloudCluster from "@/components/CloudCluster";
 import { Raleway } from "next/font/google";
-import Link from "next/link";
 import TextButton from "@/components/TextButton";
 
 import { useTranslations } from "next-intl";
+
+import { TransitionLink } from "@/components/PageTransition";
 
 const font = Raleway({ subsets: ["latin"] });
 
@@ -39,9 +40,9 @@ export default function Home() {
               <br />
               {translate("description2")}
             </h2>
-            <Link href="/home" className="mt-4 w-fit">
+            <TransitionLink href="/home" className="mt-4 w-fit">
               <TextButton text={translate("callToAction")} />
-            </Link>
+            </TransitionLink>
           </div>
         </div>
         <div className="relative flex flex-col gap-24 overflow-hidden px-8 pt-8 md:hidden">
