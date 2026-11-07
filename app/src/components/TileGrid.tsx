@@ -44,7 +44,7 @@ export default function TileGrid({
     );
   }
   return (
-    <div className="flex w-full flex-wrap gap-8 px-12 py-12">
+    <div className="flex w-full max-w-[1400px] flex-wrap justify-center gap-4 px-6">
       {visibleTiles.map((tile) => {
         const card = (
           <Card

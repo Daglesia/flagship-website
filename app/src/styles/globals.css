@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-size: 90%;
+}
+
 body {
   color: var(--color__primary);
   background: var(--color__background);
@@ -44,8 +48,8 @@ body {
 
 .tile {
   position: relative;
-  width: 480px;
-  height: 240px;
+  width: min(20rem, calc(100vw - 3rem));
+  aspect-ratio: 16 / 9;
   flex: 0 0 auto;
   display: flex;
   flex-direction: column;
@@ -53,6 +57,12 @@ body {
   justify-content: center;
   text-align: center;
   overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .tile {
+    width: clamp(14rem, 22vw, 20rem);
+  }
 }
 
 .tile__icon {

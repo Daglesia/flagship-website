@@ -13,15 +13,15 @@ export default async function Home() {
   const tiles = createTiles((key) => translate(`tiles.${key}`));
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-8 py-8">
       <ReadyOnMount />
       <div className="pt-24 text-center">
-        <h1 className="text-h1 font-bold">{translate("title")}</h1>
+        <h1 className="text-h2 font-bold">{translate("title")}</h1>
       </div>
 
       <TileGrid availableServices={availableServices} tiles={tiles} />
 
-      <div className="pb-12">
+      <div>
         {session ? (
           <form
             action={async () => {

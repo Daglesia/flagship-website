@@ -21,9 +21,7 @@ export default function Card({
   const footnoteJsx = () => {
     if (footnote) {
       return (
-        <span className="text-h5 absolute bottom-0 h-10 h-8 px-8 font-light">
-          {footnote}
-        </span>
+        <span className="absolute bottom-2 px-4 font-light">{footnote}</span>
       );
     }
     return null;
@@ -31,7 +29,7 @@ export default function Card({
 
   return (
     <div
-      className={`tile ${disabled ? "tile--disabled" : ""} aspect-video cursor-pointer gap-8 rounded-3xl bg-background__variant--light`}
+      className={`tile ${disabled ? "tile--disabled" : ""} cursor-pointer gap-2 rounded-3xl bg-background__variant--light`}
       onClick={disabled ? undefined : onClick}
       aria-disabled={disabled}
     >
@@ -39,10 +37,10 @@ export default function Card({
         src={icon}
         alt="Daglesium Logo"
         priority
-        className="img-background absolute left-0 right-0 z-0 m-auto w-32 max-w-32"
+        className="img-background absolute left-0 right-0 z-0 m-auto w-20 max-w-20"
       />
-      <h1 className="tile__title px-8 text-h2 text-primary">{title}</h1>
-      <span className="tile__description h-24 px-8 text-h3 font-light">
+      <h1 className="tile__title px-4 text-h3 text-primary">{title}</h1>
+      <span className="tile__description px-4 text-p font-light">
         {description}
       </span>
       {footnoteJsx()}
