@@ -7,10 +7,21 @@ import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import Galaxy from "@/components/Galaxy";
 import { useLoading } from "@/components/LoadingProvider";
 
-// Only mounts after <Galaxy /> has finished suspending (texture loaded).
+const usePageVisible = () => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const onChange = () => setVisible(!document.hidden);
+    onChange();
+    document.addEventListener("visibilitychange", onChange);
+    return () => document.removeEventListener("visibilitychange", onChange);
+  }, []);
+
+  return visible;
+};
+
 const Ready = ({ onReady }: { onReady: () => void }) => {
   useEffect(() => {
-    // wait a frame so the first render is on screen before fading in
     const id = requestAnimationFrame(onReady);
     return () => cancelAnimationFrame(id);
   }, [onReady]);
@@ -32,6 +43,7 @@ const Loader = ({ visible }: { visible: boolean }) => (
 const Scene = () => {
   const [loaded, setLoaded] = useState(false);
   const { markReady } = useLoading();
+  const pageVisible = usePageVisible();
 
   const handleReady = useCallback(() => {
     setLoaded(true);
@@ -46,12 +58,12 @@ const Scene = () => {
           loaded ? "opacity-100" : "opacity-0"
         }`}
       >
-        <Canvas>
+        <Canvas frameloop={pageVisible ? "always" : "never"}>
           <camera position={[0, 5, 1.0]} />
           <Galaxy />
           <Ready onReady={handleReady} />
           <OrbitControls />
-          <EffectComposer multisampling={8}>
+          <EffectComposer multisampling={4}>
             <Bloom
               kernelSize={3}
               luminanceThreshold={0}

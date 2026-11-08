@@ -14,17 +14,20 @@ import {
   Vector3,
   Euler,
 } from "three";
-import { useProgress } from "@react-three/drei";
 import vertexShader from "@/components/shaders/galaxy.vert.glsl";
 import fragmentShader from "@/components/shaders/galaxy.frag.glsl";
 
-const CustomGeometryParticles = (props: { count: any }) => {
+// Largest time step (seconds) a single frame may advance the animation by.
+// Prevents a visible jump after a long gap (e.g. returning to the tab).
+const MAX_DELTA = 0.1;
+
+const CustomGeometryParticles = (props: { count: number }) => {
   const [map] = useLoader(TextureLoader, ["/disc.png"]);
   const { count } = props;
   const radius = 2;
-  const { progress } = useProgress();
-  console.log(progress);
   const points = useRef<Points<BufferGeometry, ShaderMaterial>>(null);
+  // Our own animation clock, advanced by clamped deltas.
+  const time = useRef(0);
 
   const particlesPosition = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -34,13 +37,13 @@ const CustomGeometryParticles = (props: { count: any }) => {
 
       const aValue = 1;
 
-      let x =
+      const x =
         aValue * (1 - Math.cos(theta)) * Math.cos(theta) +
         randomNormalDistribution(-0.5, 0.5, 1);
-      let y =
+      const y =
         aValue * (1 - Math.cos(theta)) * Math.sin(theta) +
         randomNormalDistribution(-0.5, 0.5, 1);
-      let z = randomNormalDistribution(0.5, 1.5, 1);
+      const z = randomNormalDistribution(0.5, 1.5, 1);
 
       positions.set([x, y, z], i * 3);
     }
@@ -49,20 +52,20 @@ const CustomGeometryParticles = (props: { count: any }) => {
   }, [count]);
 
   const particlesSizes = useMemo(() => {
-    const positions = new Float32Array(count);
+    const sizes = new Float32Array(count);
 
     for (let i = 0; i < count; i++) {
-      positions[i] = randomNormalDistribution(-10, 10, 1);
+      sizes[i] = randomNormalDistribution(-10, 10, 1);
     }
 
-    return positions;
+    return sizes;
   }, [count]);
 
   const particlesColors = useMemo(() => {
-    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
 
     for (let i = 0; i < count; i++) {
-      positions.set(
+      colors.set(
         [
           MathUtils.randFloat(0.5, 0.6),
           MathUtils.randFloat(0.8, 1.0),
@@ -72,7 +75,7 @@ const CustomGeometryParticles = (props: { count: any }) => {
       );
     }
 
-    return positions;
+    return colors;
   }, [count]);
 
   const uniforms = useMemo(
@@ -88,14 +91,15 @@ const CustomGeometryParticles = (props: { count: any }) => {
       },
       uGlowColor: { value: new Color(0x0099ff) },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [],
   );
 
-  useFrame((state) => {
-    const { clock } = state;
+  useFrame((_, delta) => {
+    time.current += Math.min(delta, MAX_DELTA);
 
     if (points.current) {
-      points.current.material.uniforms.uTime.value = clock.elapsedTime;
+      points.current.material.uniforms.uTime.value = time.current;
     }
   });
 
@@ -135,17 +139,18 @@ const CustomGeometryParticles = (props: { count: any }) => {
 const Galaxy = () => {
   const galaxyRef = useRef<Group>(null);
   const { size } = useThree();
-  useFrame(() => {
+
+  useFrame((_, delta) => {
     if (galaxyRef.current) {
-      galaxyRef.current.rotation.z -= 0.0001;
+      // Previously 0.0001 per frame (~0.006 rad/s at 60fps), now frame-rate
+      // independent and clamped.
+      galaxyRef.current.rotation.z -= 0.006 * Math.min(delta, MAX_DELTA);
     }
   });
 
-  if (size.width <= 640) {
-  }
-  const galaxyPosition = size.width <= 640 ? [0.2, -1.15, 0] : [2.5, -0.4, 0];
+  const galaxyPosition: [number, number, number] =
+    size.width <= 640 ? [0.2, -1.15, 0] : [2.5, -0.4, 0];
 
-  console.log(size);
   return (
     <group
       ref={galaxyRef}
