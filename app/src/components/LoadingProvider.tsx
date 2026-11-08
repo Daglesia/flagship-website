@@ -20,18 +20,38 @@ const LoadingContext = createContext<LoadingContextValue>({
   markReady: () => {},
 });
 
-// Safety net: never leave the page invisible if loading hangs or WebGL fails.
+const BACKGROUND_SRC = "/sky.jpg";
+
 const MAX_WAIT_MS = 10000;
 
 export function LoadingProvider({ children }: { children: ReactNode }) {
-  const [ready, setReady] = useState(false);
-  const markReady = useCallback(() => setReady(true), []);
+  const [contentReady, setContentReady] = useState(false);
+  const [backgroundReady, setBackgroundReady] = useState(false);
+  const markReady = useCallback(() => setContentReady(true), []);
 
   useEffect(() => {
-    const timeout = setTimeout(markReady, MAX_WAIT_MS);
-    return () => clearTimeout(timeout);
-  }, [markReady]);
+    let cancelled = false;
+    const done = () => {
+      if (!cancelled) setBackgroundReady(true);
+    };
+    const img = new window.Image();
+    img.src = BACKGROUND_SRC;
+    img.decode().then(done, done); // on error, don't block the page
 
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setContentReady(true);
+      setBackgroundReady(true);
+    }, MAX_WAIT_MS);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const ready = contentReady && backgroundReady;
   const value = useMemo(() => ({ ready, markReady }), [ready, markReady]);
 
   return (

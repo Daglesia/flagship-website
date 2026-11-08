@@ -41,24 +41,21 @@ const Loader = ({ visible }: { visible: boolean }) => (
 );
 
 const Scene = () => {
-  const [loaded, setLoaded] = useState(false);
-  const { markReady } = useLoading();
-  const pageVisible = usePageVisible();
+  const { ready, markReady } = useLoading();
 
   const handleReady = useCallback(() => {
-    setLoaded(true);
     markReady();
   }, [markReady]);
 
   return (
     <>
-      <Loader visible={!loaded} />
+      <Loader visible={!ready} />
       <div
         className={`h-full w-full transition-opacity duration-500 ease-out ${
-          loaded ? "opacity-100" : "opacity-0"
+          ready ? "opacity-100" : "opacity-0"
         }`}
       >
-        <Canvas frameloop={pageVisible ? "always" : "never"}>
+        <Canvas>
           <camera position={[0, 5, 1.0]} />
           <Galaxy />
           <Ready onReady={handleReady} />
