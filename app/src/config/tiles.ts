@@ -72,5 +72,5 @@ export const createTiles = (
     description: translate("analytics.description"),
     icon: Music,
     href: appUrl("analytics"),
-  }
+  },
 ];
