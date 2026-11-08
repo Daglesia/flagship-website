@@ -67,4 +67,10 @@ export const createTiles = (
     href: appUrl("docs"),
     upcoming: true,
   },
+  {
+    title: translate("analytics.title"),
+    description: translate("analytics.description"),
+    icon: Music,
+    href: appUrl("analytics"),
+  }
 ];

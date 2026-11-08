@@ -1,24 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import Galaxy from "@/components/Galaxy";
 import { useLoading } from "@/components/LoadingProvider";
-
-const usePageVisible = () => {
-  const [visible, setVisible] = useState(true);
-
-  useEffect(() => {
-    const onChange = () => setVisible(!document.hidden);
-    onChange();
-    document.addEventListener("visibilitychange", onChange);
-    return () => document.removeEventListener("visibilitychange", onChange);
-  }, []);
-
-  return visible;
-};
 
 const Ready = ({ onReady }: { onReady: () => void }) => {
   useEffect(() => {

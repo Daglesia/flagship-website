@@ -14,6 +14,10 @@
     "tiles": {
       "noAccess": "No access.",
       "comingSoon": "Coming soon!",
+      "analytics": {
+        "title": "Analytics",
+        "description": "Metrics, monitoring and alarms in Grafana."
+      },
       "jellyfin": {
         "title": "Jellyfin",
         "description": "Personal media server with a touch of my sense of humour."
