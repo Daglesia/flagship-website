@@ -23,21 +23,21 @@ body {
 }
 
 .space-grain {
-  background-image: url("/sky.jpg");
-  background-size: 110%;
-  /* filter: invert(78%) sepia(86%) saturate(1517%) hue-rotate(169deg)
-    brightness(111%) contrast(88%) blur(4px); */
-  opacity: 0.18;
-  animation: animatedBackground 30s ease infinite alternate;
+  background-image: url("/sky.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.11;
+
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  animation: animatedBackground 60s ease-in-out infinite alternate;
 }
 
 @keyframes animatedBackground {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
+  from { transform: scale(1) translateZ(0); }
+  to   { transform: scale(1.1) translateZ(0); }
 }
 
 @layer utilities {

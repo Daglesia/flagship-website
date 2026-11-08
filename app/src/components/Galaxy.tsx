@@ -142,9 +142,7 @@ const Galaxy = () => {
 
   useFrame((_, delta) => {
     if (galaxyRef.current) {
-      // Previously 0.0001 per frame (~0.006 rad/s at 60fps), now frame-rate
-      // independent and clamped.
-      galaxyRef.current.rotation.z -= 0.006 * Math.min(delta, MAX_DELTA);
+      galaxyRef.current.rotation.z -= 0.006 * delta;
     }
   });
 
