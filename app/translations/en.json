@@ -45,6 +45,14 @@
       "models": {
         "title": "My 3D models",
         "description": "Making my life easier and fancier by using a 3D printer."
+      },
+      "sheets": {
+        "title": "Sheets",
+        "description": "Self-hosted Excel for keeping track of semi-large data sets."
+      },
+      "automation": {
+        "title": "Automation",
+        "description": "Self-hosted n8n instance for setting up automation and Discord alarms."
       }
     }
   }

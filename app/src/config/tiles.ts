@@ -1,8 +1,10 @@
+import Automation from "@/assets/automation.svg";
 import Authentik from "@/assets/authentik.svg";
 import Jellyfin from "@/assets/jellyfin.svg";
 import Forgejo from "@/assets/forgejo.svg";
 import Wikijs from "@/assets/wikijs.svg";
 import Penpot from "@/assets/penpot.svg";
+import Sheets from "@/assets/sheets.svg";
 import Music from "@/assets/music.svg";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
@@ -52,6 +54,7 @@ export const createTiles = (
     description: translate("wikijs.description"),
     icon: Wikijs,
     href: appUrl("docs"),
+    upcoming: true,
   },
   {
     title: translate("music.title"),
@@ -72,5 +75,20 @@ export const createTiles = (
     description: translate("analytics.description"),
     icon: Music,
     href: appUrl("analytics"),
+    service: "analytics",
+  },
+  {
+    title: translate("sheets.title"),
+    description: translate("sheets.description"),
+    icon: Sheets,
+    href: appUrl("sheets"),
+    service: "sheets",
+  },
+  {
+    title: translate("automation.title"),
+    description: translate("automation.description"),
+    icon: Automation,
+    href: appUrl("automation"),
+    service: "automation",
   },
 ];
