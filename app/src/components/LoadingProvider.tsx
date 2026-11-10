@@ -20,7 +20,7 @@ const LoadingContext = createContext<LoadingContextValue>({
   markReady: () => {},
 });
 
-const BACKGROUND_SRC = "/sky.jpg";
+const BACKGROUND_SRC = "/sky.webp";
 
 const MAX_WAIT_MS = 10000;
 

@@ -21,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="text-sm md:text-base bg-background text-primary">
+    <html lang="en" className="text-sm md:text-base text-primary">
       <body className={font.className}>
         <NextIntlClientProvider>
           <LoadingProvider>
