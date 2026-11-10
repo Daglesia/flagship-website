@@ -37,7 +37,7 @@ export default function Card({
         src={icon}
         alt="Daglesium Logo"
         priority
-        className="img-background absolute left-0 right-0 z-0 m-auto w-20 max-w-20"
+        className="img-background absolute inset-0 z-0 m-auto h-32 w-32 max-w-32 object-contain"
       />
       <h1 className="tile__title px-4 text-h3 text-primary">{title}</h1>
       <span className="tile__description px-4 text-p font-light">
