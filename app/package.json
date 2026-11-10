@@ -42,7 +42,6 @@
     "r3f-perf": "^7.2.1",
     "tailwindcss": "^3.4.1",
     "ts-shader-loader": "^2.0.2",
-    "tw-colors": "^3.3.1",
     "typescript": "^5",
     "vitest": "^2.0.4"
   }

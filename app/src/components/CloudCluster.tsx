@@ -42,23 +42,23 @@ const Scene = () => {
           ready ? "opacity-100" : "opacity-0"
         }`}
       >
-      <Canvas
-        dpr={[1, 1.5]}
-        gl={{ antialias: false, powerPreference: "high-performance" }}
-      >
-        <camera position={[0, 5, 1.0]} />
-        <Galaxy />
-        <Ready onReady={handleReady} />
-        <OrbitControls />
-        <EffectComposer multisampling={0}>
-          <Bloom
-            kernelSize={3}
-            luminanceThreshold={0}
-            luminanceSmoothing={0.3}
-            intensity={2}
-          />
-        </EffectComposer>
-      </Canvas>
+        <Canvas
+          dpr={[1, 1.5]}
+          gl={{ antialias: false, powerPreference: "high-performance" }}
+        >
+          <camera position={[0, 5, 1.0]} />
+          <Galaxy />
+          <Ready onReady={handleReady} />
+          <OrbitControls />
+          <EffectComposer multisampling={0}>
+            <Bloom
+              kernelSize={3}
+              luminanceThreshold={0}
+              luminanceSmoothing={0.3}
+              intensity={2}
+            />
+          </EffectComposer>
+        </Canvas>
       </div>
     </>
   );

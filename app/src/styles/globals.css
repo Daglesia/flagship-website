@@ -7,8 +7,8 @@ html {
 }
 
 body {
-  color: var(--color__primary);
-  background: var(--color__background);
+  color: theme("colors.primary");
+  background: theme("colors.background");
 }
 
 .img-background {
@@ -18,7 +18,7 @@ body {
 
 .img-primary {
   filter: brightness(0) saturate(100%)
-    drop-shadow(0px 1000px 0 hsl(var(--color__primary)));
+    drop-shadow(0px 1000px 0 theme("colors.primary"));
   transform: translateY(-1000px);
 }
 
@@ -36,8 +36,12 @@ body {
 }
 
 @keyframes animatedBackground {
-  from { transform: scale(1) translateZ(0); }
-  to   { transform: scale(1.1) translateZ(0); }
+  from {
+    transform: scale(1) translateZ(0);
+  }
+  to {
+    transform: scale(1.1) translateZ(0);
+  }
 }
 
 @layer utilities {
